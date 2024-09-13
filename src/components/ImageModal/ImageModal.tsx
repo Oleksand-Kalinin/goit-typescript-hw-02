@@ -16,6 +16,7 @@ function ImageModal({ showModal, closeModal, image }) {
     },
   };
 
+  if (!image) return;
   const { urls, alt_description, description } = image;
 
   ReactModal.setAppElement("#root");

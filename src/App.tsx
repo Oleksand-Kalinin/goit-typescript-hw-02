@@ -6,18 +6,19 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
+import { Img, OpenModal } from "./types";
 
 function App() {
-  const [query, setQuery] = useState(null);
-  const [page, setPage] = useState(1);
-  const [imgs, setImgs] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [isShowBtnLoadMore, setIsShowBtnLoadMore] = useState(false);
+  const [query, setQuery] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [imgs, setImgs] = useState<Img[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<unknown>(null); // maybe other type
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isShowBtnLoadMore, setIsShowBtnLoadMore] = useState<boolean>(false);
 
-  const [showModal, setShowModal] = useState(false);
-  const [imageCard, setImageCard] = useState({});
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [imageCard, setImageCard] = useState<Img | null>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -62,15 +63,15 @@ function App() {
     return setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (image) => {
-    setShowModal(true);
+  const openModal: OpenModal = (image) => {
     setImageCard(image);
+    setShowModal(true);
     document.body.classList.add("modalIsOpen");
   };
 
   const closeModal = () => {
+    setImageCard(null);
     setShowModal(false);
-    setImageCard({});
     document.body.classList.remove("modalIsOpen");
   };
 
@@ -91,11 +92,13 @@ function App() {
         </LoadMoreBtn>
       )}
 
-      <ImageModal
-        showModal={showModal}
-        closeModal={closeModal}
-        image={imageCard}
-      />
+      {showModal && imageCard && (
+        <ImageModal
+          showModal={showModal}
+          closeModal={closeModal}
+          image={imageCard}
+        />
+      )}
     </>
   );
 }
