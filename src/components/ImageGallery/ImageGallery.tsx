@@ -1,7 +1,13 @@
+import { Img, OpenModal } from "../../types";
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
-function ImageGallery({ imgs, openModal }) {
+interface ImageGalleryProps {
+  imgs: Img[];
+  openModal: OpenModal;
+}
+
+const ImageGallery = function ({ imgs, openModal }: ImageGalleryProps) {
   return (
     <ul className={css.galleryList}>
       {imgs.map((image) => (
@@ -9,6 +15,6 @@ function ImageGallery({ imgs, openModal }) {
       ))}
     </ul>
   );
-}
+};
 
 export default ImageGallery;

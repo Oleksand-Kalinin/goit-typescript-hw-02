@@ -1,6 +1,12 @@
+import { Img, OpenModal } from "../../types";
 import css from "./ImageCard.module.css";
 
-function ImageCard({ image, openModal }) {
+interface ImageCardProps {
+  image: Img;
+  openModal: OpenModal;
+}
+
+const ImageCard = function ({ image, openModal }: ImageCardProps) {
   const { urls, alt_description, user, likes } = image;
 
   const handleClickImg = () => {
@@ -22,6 +28,6 @@ function ImageCard({ image, openModal }) {
       </div>
     </li>
   );
-}
+};
 
 export default ImageCard;

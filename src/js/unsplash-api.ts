@@ -1,9 +1,10 @@
 import axios from "axios";
+import { ResponseGetImgs } from "../types";
 
 export async function getImgs(
   requestImgs: string,
   numberPage: number
-): Promise<object> {
+): Promise<ResponseGetImgs> {
   axios.defaults.baseURL = "https://api.unsplash.com/search/photos";
   const option = {
     params: {
@@ -14,7 +15,7 @@ export async function getImgs(
       orientation: "landscape",
     },
   };
-  const { data } = await axios.get("", option);
+  const { data } = await axios.get<ResponseGetImgs>("", option);
 
   return data;
 }

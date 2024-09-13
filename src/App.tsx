@@ -6,9 +6,15 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
-import { Img, OpenModal } from "./types";
+import {
+  ClickLoadMoreBtn,
+  CloseModal,
+  Img,
+  OpenModal,
+  SubmitSearchBar,
+} from "./types";
 
-function App() {
+const App = function () {
   const [query, setQuery] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
   const [imgs, setImgs] = useState<Img[]>([]);
@@ -42,7 +48,7 @@ function App() {
     fetchImgs();
   }, [page, query]);
 
-  const handleSubmitSearchBar = (querySearchBar) => {
+  const handleSubmitSearchBar: SubmitSearchBar = (querySearchBar) => {
     if (!querySearchBar.trim()) return;
 
     setQuery(querySearchBar);
@@ -53,7 +59,7 @@ function App() {
     setIsEmpty(false);
   };
 
-  const handleClickLoadMoreBtn = (heightForScroll) => {
+  const handleClickLoadMoreBtn: ClickLoadMoreBtn = (heightForScroll) => {
     setTimeout(() => {
       window.scrollBy({
         top: heightForScroll,
@@ -69,7 +75,7 @@ function App() {
     document.body.classList.add("modalIsOpen");
   };
 
-  const closeModal = () => {
+  const closeModal: CloseModal = () => {
     setImageCard(null);
     setShowModal(false);
     document.body.classList.remove("modalIsOpen");
@@ -101,6 +107,6 @@ function App() {
       )}
     </>
   );
-}
+};
 
 export default App;

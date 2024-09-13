@@ -1,7 +1,18 @@
 import ReactModal from "react-modal";
 import css from "./ImageModal.module.css";
+import { CloseModal, Img } from "../../types";
 
-function ImageModal({ showModal, closeModal, image }) {
+interface ImageModalProps {
+  showModal: boolean;
+  closeModal: CloseModal;
+  image: Img;
+}
+
+const ImageModal = function ({
+  showModal,
+  closeModal,
+  image,
+}: ImageModalProps) {
   const customStyles = {
     content: {
       top: "50%",
@@ -34,6 +45,6 @@ function ImageModal({ showModal, closeModal, image }) {
       </div>
     </ReactModal>
   );
-}
+};
 
 export default ImageModal;

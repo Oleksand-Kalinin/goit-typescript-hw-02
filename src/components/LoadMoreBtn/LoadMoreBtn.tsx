@@ -1,8 +1,20 @@
+import { ReactNode } from "react";
+import { ClickLoadMoreBtn } from "../../types";
 import css from "./LoadMoreBtn.module.css";
 
-function LoadMoreBtn({ children, onClick, disabled }) {
-  const handleClick = (e) => {
-    const heightForScroll = e.target.getBoundingClientRect().top - 32;
+interface LoadMoreBtnProps {
+  children: string;
+  onClick: ClickLoadMoreBtn;
+  disabled: boolean;
+}
+
+const LoadMoreBtn = function ({
+  children,
+  onClick,
+  disabled,
+}: LoadMoreBtnProps) {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const heightForScroll = e.currentTarget.getBoundingClientRect().top - 32;
     onClick(heightForScroll);
   };
 
@@ -16,6 +28,6 @@ function LoadMoreBtn({ children, onClick, disabled }) {
       {children}
     </button>
   );
-}
+};
 
 export default LoadMoreBtn;
